@@ -46,4 +46,49 @@ public class CloudinaryConfig {
         String[] url = name.split("/");
         return String.format("http://res.cloudinary.com/%s/image/upload/bo_%spx_solid_black,c_%s,e_%s,h_%s,w_%s/%s", cloud, border, action, effect,height, width, url[url.length-1]);
     }
+    public String createUrlSuper(String name, int width, int height, String action, String effect, int border){
+       String[] url = name.split("/");
+        String[] superUrl =  (cloudinary.url()
+                .transformation(new Transformation().width(width).height(height).border(border+"px_solid_black").crop(action).effect(effect))
+                .imageTag(url[url.length-1])).split("'");
+
+        return superUrl[1];
+    }
+
+    public String createUrlSuper(String name, int width, int height, String action, String effect){
+        String[] url = name.split("/");
+        String[] superUrl =  (cloudinary.url()
+                .transformation(new Transformation().width(width).height(height).crop(action).effect(effect))
+                .imageTag(url[url.length-1])).split("'");
+
+        return superUrl[1];
+    }
+
+    public String createUrlSuper(String name, int width, int height, String effect){
+        String[] url = name.split("/");
+        String[] superUrl =  (cloudinary.url()
+                .transformation(new Transformation().width(width).height(height).effect(effect))
+                .imageTag(url[url.length-1])).split("'");
+
+        return superUrl[1];
+    }
+
+    public String createUrlSuper(String name, int height){
+        String[] url = name.split("/");
+        String[] superUrl =  (cloudinary.url()
+                .transformation(new Transformation().height(height).crop("fit"))
+                .imageTag(url[url.length-1])).split("'");
+
+        return superUrl[1];
+    }
+
+    public String createUrlSuperMeme(String name, int width, int height, String action, String effect, int border, String text, int fontSize){
+        String[] url = name.split("/");
+        String[] superUrl =  (cloudinary.url()
+                .transformation(new Transformation().width(width).height(height).border(border+"px_solid_black").crop(action).effect(effect)
+                        .overlay("text:bold_dark:"+text).x(fontSize).y(fontSize).gravity("south_east"))
+                .imageTag(url[url.length-1])).split("'");
+
+        return superUrl[1];
+    }
 }

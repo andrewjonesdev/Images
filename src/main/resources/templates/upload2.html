@@ -20,14 +20,35 @@
     <br /><br />
     <h1>Spring Boot file upload example</h1>
     <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="text" name="file" />
         <input type="file" name="file" /><br/><br/>
         <input type="submit" value="Submit" />
     </form>
     <div th:if="${message}">
         <h2 th:text="${message}"/><br/><br/>
     </div>
-    <div th:if="${imageurl} != null">
-        <img th:src="${imageurl}" />
+    <div th:if="${imageurl1} != null">
+        <img th:src="${imageurl1}" />
+        <hr />
+    </div>
+    <div th:if="${imageurl2} != null">
+        <img th:src="${imageurl2}" />
+        <hr />
+    </div>
+    <div th:if="${imageurl3} != null">
+        <img th:src="${imageurl3}" />
+        <hr />
+    </div>
+    <div th:if="${imageurl4} != null">
+        <img th:src="${imageurl4}" />
+        <hr />
+    </div>
+    <div th:if="${imageurl5} != null">
+        <img th:src="${imageurl5}" />
+        <hr />
+    </div>
+    <div th:if="${imageurl6} != null">
+        <img th:src="${imageurl6}" />
         <hr />
     </div>
 </div><!-- /.container -->
