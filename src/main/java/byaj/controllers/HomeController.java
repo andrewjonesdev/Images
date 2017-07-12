@@ -144,7 +144,7 @@ public class HomeController {
         return "upload2";
     }
     @PostMapping("/upload")
-    public String singleImageUpload(@RequestParam("file") MultipartFile file,@RequestParam("text") String text,@RequestParam("fontSize") int fontSize, RedirectAttributes redirectAttributes, Model model){
+    public String singleImageUpload(@RequestParam("file") MultipartFile file,@RequestParam("text") String text,@RequestParam("fontSize") int fontSize,@RequestParam("scale") int scale,@RequestParam("x") int x,@RequestParam("y") int y, RedirectAttributes redirectAttributes, Model model){
         model.addAttribute("search", new Search());
         if (file.isEmpty()){
             model.addAttribute("message","Please select a file to upload");
@@ -158,6 +158,7 @@ public class HomeController {
             System.out.println(uploadResult.get("height").toString());
             System.out.println(cloudc.createUrlNoFormat(uploadResult.get("url").toString(), Integer.parseInt(uploadResult.get("width").toString()), Integer.parseInt(uploadResult.get("height").toString()), "fill", "sepia", 2));
             System.out.println(cloudc.createUrlSuper(uploadResult.get("url").toString(), Integer.parseInt(uploadResult.get("width").toString()), Integer.parseInt(uploadResult.get("height").toString()), "fill", "sepia", 2));
+            System.out.println(cloudc.createUrlSuperMeme(uploadResult.get("url").toString(), Integer.parseInt(uploadResult.get("width").toString()), Integer.parseInt(uploadResult.get("height").toString()), "fill", "sepia", 2, text, fontSize,scale, x, y));
             model.addAttribute("message", "You successfully uploaded '" + file.getOriginalFilename() + "'");
             model.addAttribute("imageurl1", uploadResult.get("url"));
         //    model.addAttribute("imageurl", cloudc.createUrlNoFormat(uploadResult.get("url").toString(), Integer.parseInt(uploadResult.get("width").toString()), Integer.parseInt(uploadResult.get("height").toString()), "fill", "sepia", 2));
@@ -166,7 +167,7 @@ public class HomeController {
         /*40x40 sepia cropped*/ model.addAttribute("imageurl3", cloudc.createUrlSuper(uploadResult.get("url").toString(), 40, 40, "pad", "sepia"));
         /*40x40 sepia*/ model.addAttribute("imageurl4", cloudc.createUrlSuper(uploadResult.get("url").toString(), 40, 40, "sepia"));
         /*fixed height width auto*/ model.addAttribute("imageurl5", cloudc.createUrlSuper(uploadResult.get("url").toString(), 100));
-        /*master*/    model.addAttribute("imageurl6", cloudc.createUrlSuperMeme(uploadResult.get("url").toString(), Integer.parseInt(uploadResult.get("width").toString()), Integer.parseInt(uploadResult.get("height").toString()), "fill", "sepia", 2, text, fontSize));
+        /*master*/    model.addAttribute("imageurl6", cloudc.createUrlSuperMeme(uploadResult.get("url").toString(), Integer.parseInt(uploadResult.get("width").toString()), Integer.parseInt(uploadResult.get("height").toString()), "fill", "sepia", 2, text, fontSize, scale, x, y));
 
         } catch (IOException e){
             e.printStackTrace();

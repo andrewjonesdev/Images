@@ -22,7 +22,10 @@
     <form method="POST" action="/upload" enctype="multipart/form-data">
         <input type="text" name="text" />
         <input type="file" name="file" />
-        <input type="number" name="fontSize" min="1" max="12" /><br/><br/>
+        <input type="number" name="fontSize" min="1" max="100" />
+        <input type="number" name="scale" min="1" max="100" />
+        <input type="number" name="x" min="1" max="100" />
+        <input type="number" name="y" min="1" max="100" /><br/><br/>
         <input type="submit" value="Submit" />
     </form>
     <div th:if="${message}">
