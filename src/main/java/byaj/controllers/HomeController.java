@@ -144,7 +144,7 @@ public class HomeController {
         return "upload2";
     }
     @PostMapping("/upload")
-    public String singleImageUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, Model model){
+    public String singleImageUpload(@RequestParam("file") MultipartFile file,@RequestParam("text") String text,@RequestParam("fontSize") int fontSize, RedirectAttributes redirectAttributes, Model model){
         model.addAttribute("search", new Search());
         if (file.isEmpty()){
             model.addAttribute("message","Please select a file to upload");
@@ -166,6 +166,8 @@ public class HomeController {
         /*40x40 sepia cropped*/ model.addAttribute("imageurl3", cloudc.createUrlSuper(uploadResult.get("url").toString(), 40, 40, "pad", "sepia"));
         /*40x40 sepia*/ model.addAttribute("imageurl4", cloudc.createUrlSuper(uploadResult.get("url").toString(), 40, 40, "sepia"));
         /*fixed height width auto*/ model.addAttribute("imageurl5", cloudc.createUrlSuper(uploadResult.get("url").toString(), 100));
+        /*master*/    model.addAttribute("imageurl6", cloudc.createUrlSuperMeme(uploadResult.get("url").toString(), Integer.parseInt(uploadResult.get("width").toString()), Integer.parseInt(uploadResult.get("height").toString()), "fill", "sepia", 2, text, fontSize));
+
         } catch (IOException e){
             e.printStackTrace();
             model.addAttribute("message", "Sorry I can't upload that!");
